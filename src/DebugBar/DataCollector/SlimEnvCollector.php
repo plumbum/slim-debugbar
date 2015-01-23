@@ -28,13 +28,13 @@ class SlimEnvCollector extends DataCollector implements Renderable
     {
         $slim_version = Slim::VERSION;
         $php_version = PHP_VERSION;
-        return [
-            'mode' => [
+        return array(
+            'mode' => array(
                 'icon' => 'info',
                 'tooltip' => "Slim {$slim_version} | PHP {$php_version}",
                 'map' => 'slim',
                 'default' => '',
-            ]
-        ];
+            )
+        );
     }
 }

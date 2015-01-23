@@ -21,12 +21,12 @@ class SlimResponseCollector extends DataCollector implements Renderable
      */
     function collect()
     {
-        return [
+        return array(
             'content-type' => $this->response->header('Content-Type'),
             'status_code' => $this->response->getStatus(),
             'headers' => $this->getDataFormatter()->formatVar($this->response->headers->all()),
             'cookies' => $this->getDataFormatter()->formatVar($this->response->cookies->all()),
-        ];
+        );
     }
 
     /**
@@ -47,13 +47,13 @@ class SlimResponseCollector extends DataCollector implements Renderable
      */
     function getWidgets()
     {
-        return [
-            'response' => [
+        return array(
+            'response' => array(
                 'icon' => 'tags',
                 'widget' => 'PhpDebugBar.Widgets.VariableListWidget',
                 'map' => 'response',
                 'default' => '{}',
-            ]
-        ];
+            )
+        );
     }
 }

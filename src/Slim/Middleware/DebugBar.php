@@ -110,7 +110,9 @@ class DebugBar extends Middleware
     public function getDebugHtml()
     {
         $renderer = $this->debugbar->getJavascriptRenderer();
-        return implode("\n", [$this->getCssHtml(), $this->getJsHtml(), $renderer->render()]);
+        return implode("\n", array(
+            $this->getCssHtml(), $this->getJsHtml(), $renderer->render()
+        ));
     }
 
     public function getCssHtml()
@@ -134,28 +136,30 @@ class DebugBar extends Middleware
 
     protected function setAssetsRoute()
     {
+        $l_this = $this;
         $renderer = $this->debugbar->getJavascriptRenderer();
-        $this->app->get('/_debugbar/fonts/:file', function($file) use ($renderer)
+        $this->app->get('/_debugbar/fonts/:file', function($file) use ($renderer, $l_this)
         {
             // e.g. $file = fontawesome-webfont.woff?v=4.0.3
             $files = explode('?', $file);
             $file = reset($files);
             $path = $renderer->getBasePath() . '/vendor/font-awesome/fonts/' . $file;
-            $this->app->response->header('Content-Type', (new \finfo(FILEINFO_MIME))->file($path));
+            $tmp_finfo = new \finfo(FILEINFO_MIME);
+            $l_this->app->response->header('Content-Type', $tmp_finfo->file($path));
             echo file_get_contents($path);
         });
-        $this->app->get('/_debugbar/resources/:file', function($file) use ($renderer)
+        $this->app->get('/_debugbar/resources/:file', function($file) use ($renderer, $l_this)
         {
             $files = explode('.', $file);
             $ext = end($files);
             if ($ext === 'css') {
-                $this->app->response->header('Content-Type', 'text/css');
+                $l_this->app->response->header('Content-Type', 'text/css');
                 $renderer->dumpCssAssets();
             } elseif ($ext === 'js') {
-                $this->app->response->header('Content-Type', 'text/javascript');
+                $l_this->app->response->header('Content-Type', 'text/javascript');
                 $renderer->dumpJsAssets();
             } else {
-                $this->app->response->header('Content-Type', 'image/png');
+                $l_this->app->response->header('Content-Type', 'image/png');
                 $path = $renderer->getBasePath() . '/' .$file;
                 echo file_get_contents($path);
             }

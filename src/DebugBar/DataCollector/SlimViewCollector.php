@@ -2,7 +2,7 @@
 
 class SlimViewCollector extends ConfigCollector
 {
-    public function __construct(array $data = [])
+    public function __construct(array $data = array())
     {
         parent::__construct($data, 'view');
     }

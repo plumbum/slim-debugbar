@@ -3,7 +3,7 @@
     "license": "MIT",
     "keywords": ["slim", "middleware", "debugbar"],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.3.3",
         "slim/slim": "2.*",
         "maximebf/debugbar": ">=1.0.0"
     },

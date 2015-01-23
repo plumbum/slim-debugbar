@@ -30,25 +30,25 @@ class SlimRouteCollector extends ConfigCollector
         $method = $this->slim->request->getMethod();
         $path = $this->slim->request->getPathInfo();
         $uri = $method . ' ' . $path;
-        return [
+        return array(
             'uri' => $uri,
             'pattern' => $route->getPattern(),
             'params' => $route->getParams() ?: '-',
             'name' => $route->getName() ?: '-',
             'conditions' => $route->getConditions() ?: '-',
-        ];
+        );
     }
 
     public function getWidgets()
     {
         $name = $this->getName();
         $data = parent::getWidgets();
-        $data['currentroute'] = [
+        $data['currentroute'] = array(
             'icon' => 'share',
             'tooltip' => 'Route',
             'map' => "$name.uri",
             'default' => '{}',
-        ];
+        );
         return $data;
     }
 }
