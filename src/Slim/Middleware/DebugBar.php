@@ -13,7 +13,7 @@ class DebugBar extends Middleware
      *
      * @var \Slim\Slim
      */
-    protected $app;
+    public $app;
 
     /**
      * Debugbar instance
